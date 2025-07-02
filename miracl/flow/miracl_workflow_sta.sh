@@ -691,8 +691,7 @@ fi
 #---------------------------
 # Call extract lbl
 
-# reg_lbls=${regdir}/annotation_hemi_${hemi}_??um_clar_space_downsample.nii.gz
-reg_lbls=${regdir}/annotation_hemi_${hemi}_??um_clar_downsample.nii.gz
+reg_lbls=${regdir}/annotation_hemi_${hemi}_??um_clar_space_downsample.nii.gz
 
 if [[ "${hemi}" == "combined" ]]; then
     # get chosen depth
@@ -721,8 +720,7 @@ fi
 
 
 # Generate label mask at depth of ROI
-# deep_lbls=annotation_hemi_${hemi}_??um_clar_space_downsample_depth_${depth}.nii.gz
-deep_lbls=${work_dir}/annotation_hemi_${hemi}_??um_clar_downsample_depth_${depth}.nii.gz
+deep_lbls=annotation_hemi_${hemi}_??um_clar_space_downsample_depth_${depth}.nii.gz
 
 if [[ ! -f ${deep_lbls} ]]; then
 
@@ -731,8 +729,8 @@ if [[ ! -f ${deep_lbls} ]]; then
     echo "miracl lbls gp_at_depth -l ${reg_lbls} -d ${depth}"
     miracl lbls gp_at_depth -l ${reg_lbls} -d ${depth}
 
-    # echo "c3d ${reg_lbls} ${deep_lbls} -copy-transform -o ${deep_lbls}"
-    # c3d ${reg_lbls} ${deep_lbls} -copy-transform -o ${deep_lbls}
+    echo "c3d ${reg_lbls} ${deep_lbls} -copy-transform -o ${deep_lbls}"
+    c3d ${reg_lbls} ${deep_lbls} -copy-transform -o ${deep_lbls}
 
 else
 
@@ -742,7 +740,7 @@ fi
 
 if [[ -z ${lbl_mask} ]]; then
 
-    lbl_mask="${work_dir}/${lbl////_}_mask.nii.gz"
+    lbl_mask="${lbl////_}_mask.nii.gz"
 
 else
 
@@ -782,7 +780,7 @@ fi
 
 if [[ ! -f ${brain_mask} ]]; then
 
-    brain_mask=${work_dir}/clarity_brain_mask.nii.gz
+    brain_mask=clarity_brain_mask.nii.gz
 
 else
 
@@ -809,7 +807,7 @@ fi
 
 # Call lbl stats
 
-lbl_stats=${work_dir}/virus_signal_stats_depth_${depth}.csv
+lbl_stats=virus_signal_stats_depth_${depth}.csv
 
 if [[ ! -f ${lbl_stats} ]]; then
 
@@ -840,7 +838,7 @@ fi
 
 # set output directory based on label seed if not done as initial input
 if [[ -z "${out_dir}" ]]; then
-    out_dir="${work_dir}/clarity_sta_${lbl////_}_seed"
+    out_dir="clarity_sta_${lbl////_}_seed"
 fi
 
 # gen tract density map
