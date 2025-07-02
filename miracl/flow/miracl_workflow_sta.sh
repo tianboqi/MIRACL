@@ -729,8 +729,8 @@ if [[ ! -f ${deep_lbls} ]]; then
     echo "miracl lbls gp_at_depth -l ${reg_lbls} -d ${depth}"
     miracl lbls gp_at_depth -l ${reg_lbls} -d ${depth}
 
-    echo "c3d ${reg_lbls} ${deep_lbls} -copy-transform -o ${deep_lbls}"
-    c3d ${reg_lbls} ${deep_lbls} -copy-transform -o ${deep_lbls}
+    # echo "c3d ${reg_lbls} ${deep_lbls} -copy-transform -o ${deep_lbls}"
+    # c3d ${reg_lbls} ${deep_lbls} -copy-transform -o ${deep_lbls}
 
 else
 
