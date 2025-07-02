@@ -107,6 +107,16 @@ RUN wget -O /code/miracl/seg/models/unetr/best_metric_model.pth https://huggingf
 #STARTUNCOMMENT#
 #STOPUNCOMMENT#
 
+###############################################################################
+#--- TrackVis and Diffuse Toolkit ---
+# Copy TrackVis and DTK into the image
+COPY trackvis /opt/trackvis
+COPY dtk /opt/dtk
+
+# Add them to PATH
+ENV PATH="/opt/trackvis:$PATH"
+ENV PATH="/opt/dtk:$PATH"
+
 ################################################################################
 
 # Temporarily uncommented to allow interactive shell access to Docker container
