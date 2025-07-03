@@ -113,6 +113,10 @@ RUN wget -O /code/miracl/seg/models/unetr/best_metric_model.pth https://huggingf
 COPY trackvis /opt/trackvis
 COPY dtk /opt/dtk
 
+# Make sure the scripts are executable
+RUN chmod +x /opt/trackvis/*.sh
+RUN chmod +x /opt/dtk/*.sh
+
 # Add them to PATH
 ENV PATH="/opt/trackvis:$PATH"
 ENV PATH="/opt/dtk:$PATH"
