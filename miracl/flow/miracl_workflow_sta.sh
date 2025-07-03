@@ -722,7 +722,7 @@ fi
 # Generate label mask at depth of ROI
 deep_lbls=annotation_hemi_${hemi}_??um_clar_space_downsample_depth_${depth}.nii.gz
 
-if [[ ! -f ${deep_lbls} ]]; then
+if [[ ! compgen -G "$deep_lbls" > /dev/null; ]]; then
 
     printf "\n Generating grand parent labels for ${lbl} at depth ${depth} \n"
 
@@ -767,7 +767,7 @@ if [[ ! -f ${lbl_mask} ]]; then
     fi
 
     # fslcpgeom "${nii_file}" "${lbl_mask}"
-    c3d "${nii_file}" "${lbl_mask}" -copy-transform -o "${lbl_mask}"
+    # c3d "${nii_file}" "${lbl_mask}" -copy-transform -o "${lbl_mask}"
 
 else
 
@@ -865,12 +865,12 @@ for dog_sigma in ${dog//,/ }; do
                 if [[ ! -f "${tracts}" ]]; then
                     if [[ -n "${rk2}" ]]; then
                         printf "\n miracl sta track_tensor -i ${nii_file} -b ${brain_mask} -s ${lbl_mask}  \
-                                   -dog ${dog_sigma} -gauss ${gauss_sigma} -angle ${angle_val} -sl ${step} -o ${out_dir} -sl -r \n"
+                                   --dog ${dog_sigma} --gauss ${gauss_sigma} --angle ${angle_val} -sl ${step} -o ${out_dir} -sl -r \n"
                         miracl sta track_tensor -i ${nii_file} -b ${brain_mask} -s ${lbl_mask} \
                                                          -g ${dog_sigma} -k ${gauss_sigma} -a ${angle_val} -sl ${step} -o ${out_dir} -r
                     else
                         printf "\n miracl sta track_tensor -i ${nii_file} -b ${brain_mask} -s ${lbl_mask}  \
-                                   -dog ${dog_sigma} -gauss ${gauss_sigma} -angle ${angle_val} -sl ${step} -o ${out_dir} \n"
+                                   --dog ${dog_sigma} --gauss ${gauss_sigma} --angle ${angle_val} -sl ${step} -o ${out_dir} \n"
                         miracl sta track_tensor -i ${nii_file} -b ${brain_mask} -s ${lbl_mask} \
                                                          -g ${dog_sigma} -k ${gauss_sigma} -a ${angle_val} -sl ${step} -o ${out_dir}
                     fi
