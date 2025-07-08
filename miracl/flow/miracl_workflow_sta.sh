@@ -722,7 +722,7 @@ fi
 # Generate label mask at depth of ROI
 deep_lbls=annotation_hemi_${hemi}_??um_clar_space_downsample_depth_${depth}.nii.gz
 
-if [[ ! compgen -G "$deep_lbls" > /dev/null; ]]; then
+if ! compgen -G "$deep_lbls" > /dev/null; then
 
     printf "\n Generating grand parent labels for ${lbl} at depth ${depth} \n"
 
